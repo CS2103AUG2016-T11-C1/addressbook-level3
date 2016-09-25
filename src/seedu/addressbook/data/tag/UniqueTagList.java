@@ -28,7 +28,7 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public static class TagNotFoundException extends Exception {}
 
-    private final List<Tag> internalList = new ArrayList<>();
+    private List<Tag> internalList = new ArrayList<>();
 
     /**
      * Constructs an empty TagList.
