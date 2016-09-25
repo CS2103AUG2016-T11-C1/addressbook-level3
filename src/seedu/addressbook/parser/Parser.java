@@ -48,6 +48,7 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
+     * @throws IllegalValueException 
      */
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -70,6 +71,9 @@ public class Parser {
 
             case FindCommand.COMMAND_WORD:
                 return prepareFind(arguments);
+            
+            case FindTagCommand.COMMAND_WORD:
+            	return prepareFindTag(arguments);
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
@@ -228,5 +232,17 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
+    private Command prepareFindTag(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindTagCommand(keywordSet);
+    }
 
 }
