@@ -23,7 +23,7 @@ public class EditCommand extends Command {
 	public static final String COMMAND_WORD = "edit";
 	public static final String MESSAGE_USAGE = COMMAND_WORD + ": \nEdits the name, phone, address or email of a specified person.\n"
 			+ "Example: " + COMMAND_WORD
-			+ " 1 John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+			+ " 1 John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25";
 	public static final String MESSAGE_SUCCESS = "Edited Successfully!";
 	public static final String MESSAGE_FAIL = "Editing failed!";
 
