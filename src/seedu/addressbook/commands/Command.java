@@ -12,57 +12,68 @@ import static seedu.addressbook.ui.Gui.DISPLAYED_INDEX_OFFSET;
  * Represents an executable command.
  */
 public abstract class Command {
-    protected AddressBook addressBook;
-    protected List<? extends ReadOnlyPerson> relevantPersons;
-    private int targetIndex = -1;
+	protected AddressBook addressBook;
+	protected List<? extends ReadOnlyPerson> relevantPersons;
+	private int targetIndex = -1;
 
-    /**
-     * @param targetIndex last visible listing index of the target person
-     */
-    public Command(int targetIndex) {
-        this.setTargetIndex(targetIndex);
-    }
+	/**
+	 * @param targetIndex
+	 *            last visible listing index of the target person
+	 */
+	public Command(int targetIndex) {
+		this.setTargetIndex(targetIndex);
+	}
 
-    protected Command() {
-    }
+	protected Command() {
+	}
 
-    /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
-     *
-     * @param personsDisplayed used to generate summary
-     * @return summary message for persons displayed
-     */
-    public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
-        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
-    }
+	/**
+	 * Constructs a feedback message to summarise an operation that displayed a
+	 * listing of persons.
+	 *
+	 * @param personsDisplayed
+	 *            used to generate summary
+	 * @return summary message for persons displayed
+	 */
+	public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
+		return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
+	}
 
-    /**
-     * Executes the command and returns the result.
-     */
-    public abstract CommandResult execute();
+	/**
+	 * Executes the command and returns the result.
+	 */
+	public abstract CommandResult execute() throws Exception;
 
-    /**
-     * Supplies the data the command will operate on.
-     */
-    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
-        this.addressBook = addressBook;
-        this.relevantPersons = relevantPersons;
-    }
+	/**
+	 * Checks whether the command entered will mutate the data.
+	 */
+	public abstract boolean isMutating();
 
-    /**
-     * Extracts the the target person in the last shown list from the given arguments.
-     *
-     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
-     */
-    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
-        return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
-    }
+	/**
+	 * Supplies the data the command will operate on.
+	 */
+	public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+		this.addressBook = addressBook;
+		this.relevantPersons = relevantPersons;
+	}
 
-    public int getTargetIndex() {
-        return targetIndex;
-    }
+	/**
+	 * Extracts the the target person in the last shown list from the given
+	 * arguments.
+	 *
+	 * @throws IndexOutOfBoundsException
+	 *             if the target index is out of bounds of the last viewed
+	 *             listing
+	 */
+	protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
+		return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
+	}
 
-    public void setTargetIndex(int targetIndex) {
-        this.targetIndex = targetIndex;
-    }
+	public int getTargetIndex() {
+		return targetIndex;
+	}
+
+	public void setTargetIndex(int targetIndex) {
+		this.targetIndex = targetIndex;
+	}
 }
