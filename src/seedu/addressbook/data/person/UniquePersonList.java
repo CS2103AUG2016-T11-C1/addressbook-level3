@@ -28,7 +28,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public static class PersonNotFoundException extends Exception {}
 
-    private final List<Person> internalList = new ArrayList<>();
+    private final TreeSet<Person> internalList = new TreeSet<Person>();
 
     /**
      * Constructs empty person list.
@@ -71,7 +71,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Any changes to the internal list/elements are immediately visible in the returned list.
      */
     public List<ReadOnlyPerson> immutableListView() {
-        return Collections.unmodifiableList(internalList);
+        return Collections.unmodifiableList(new ArrayList<Person>(internalList));
     }
     
     public List<Person> getList(){
