@@ -65,6 +65,22 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
+## Rename a person's tag: `renametag`
+Renames the tag of a specified person in the address book.<br>
+Format: `renametag INDEX ot/OLDTAG nt/NEWTAG` 
+ 
+> Words in `UPPER_CASE` are the parameters.
+> Renames the tag of the person at the specified `INDEX`. 
+  The index refers to the index number shown in the most recent listing.
+
+Examples: 
+* `list`<br>
+  `renametag 1 ot/friend nt/enemy`
+  Renames the tag of the 1st person.
+* `find Betsy`<br> 
+  `renametag 2 ot/owemoney nt/paidmoney`<br>
+  Renames the tag of the 2nd person in the results of the `find` command.
+
 ## View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
 Format: `view INDEX`
