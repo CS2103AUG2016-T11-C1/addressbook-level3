@@ -28,7 +28,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public static class PersonNotFoundException extends Exception {}
 
-    private final TreeSet<Person> internalList = new TreeSet<Person>();
+    private final List<Person> internalList = new ArrayList<Person>();
 
     /**
      * Constructs empty person list.
@@ -134,5 +134,5 @@ public class UniquePersonList implements Iterable<Person> {
     public int hashCode() {
         return internalList.hashCode();
     }
-
+    
 }
