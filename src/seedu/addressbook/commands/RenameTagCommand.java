@@ -8,6 +8,9 @@ import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 import static seedu.addressbook.ui.Gui.DISPLAYED_INDEX_OFFSET;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * Renames a tag of a person identified using the last displayed index.
  */
@@ -28,13 +31,13 @@ public class RenameTagCommand extends Command {
      * @throws IllegalValueException if the new tag name is invalid
      * @throws TagNotFoundException if the old tag is invalid
      */
-    public RenameTagCommand(int index, String oldTag, String newTag) throws IllegalValueException, TagNotFoundException {
+    public RenameTagCommand(int index, ArrayList<String> tags) throws IllegalValueException, TagNotFoundException {
         toRenameTag = getPersonWithIndex();
-    	toRenameTag.removeTag(new Tag(oldTag));
-        toRenameTag.addTag(new Tag(newTag));
-    }
+    	toRenameTag.removeTag(new Tag(tags.get(0)));
+        toRenameTag.addTag(new Tag(tags.get(1)));
+	}
 
-    @Override
+	@Override
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();

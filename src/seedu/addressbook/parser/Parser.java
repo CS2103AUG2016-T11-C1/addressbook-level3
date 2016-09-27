@@ -2,6 +2,7 @@ package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -48,8 +49,10 @@ public class Parser {
      *
      * @param userInput full user input string
      * @return the command based on the user input
+     * @throws TagNotFoundException 
+     * @throws IllegalValueException 
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput) throws IllegalValueException, TagNotFoundException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -73,6 +76,9 @@ public class Parser {
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
+                
+            case RenameTagCommand.COMMAND_WORD:
+                return prepareRenameTag(arguments);
 
             case ViewCommand.COMMAND_WORD:
                 return prepareView(arguments);
@@ -228,5 +234,21 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
+    private Command prepareRenameTag(String args) throws IllegalValueException, TagNotFoundException {
+    	final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+    	
+    	return new RenameTagCommand(getIndex(args), getTagsForRenaming(matcher.group("tagArguments")));
+    }
+
+	private ArrayList<String> getTagsForRenaming(String tagArguments) {
+		final ArrayList<String> tags = (ArrayList<String>) Arrays.asList(tagArguments.replaceFirst(" ot/", "").split(" nt/"));
+		return tags;
+	}
+
+	private int getIndex(String args) {
+		args = args.trim();
+		String index = args.substring(0, args.indexOf(" "));
+		return Integer.parseInt(index);
+	}
 
 }
