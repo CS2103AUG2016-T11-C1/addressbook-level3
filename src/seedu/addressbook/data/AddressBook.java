@@ -144,6 +144,10 @@ public class AddressBook {
     public UniqueTagList getAllTags() {
         return new UniqueTagList(allTags);
     }
+    
+    public void sortPeopleByName() {
+		allPersons.sortPersonByName();
+	}
 
     @Override
     public boolean equals(Object other) {
