@@ -99,6 +99,9 @@ public class Parser {
 
 		case ViewAllCommand.COMMAND_WORD:
 			return prepareViewAll(arguments);
+			
+        case SortByNameCommand.COMMAND_WORD:
+        	return new SortByNameCommand();
 
 		case ExitCommand.COMMAND_WORD:
 			return new ExitCommand();

@@ -82,6 +82,11 @@ public class AddressBook {
         allPersons.add(toAdd);
     }
 
+
+	public void sortPeopleByName() {
+		allPersons.sortPersonByName();
+	}
+	
     /**
      * Adds a tag to the list of tags present in the address book.
      *

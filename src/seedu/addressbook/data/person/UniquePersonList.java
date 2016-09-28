@@ -121,6 +121,11 @@ public class UniquePersonList implements Iterable<Person> {
     public Iterator<Person> iterator() {
         return internalList.iterator();
     }
+    
+    public void sortPersonByName(){
+       	SortByName sortName = new SortByName();
+       	Collections.sort(internalList, sortName);
+    }
 
     @Override
     public boolean equals(Object other) {
